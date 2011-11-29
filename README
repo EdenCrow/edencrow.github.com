@@ -2,14 +2,6 @@ PERSONAL HOMEPAGE
 -----------------
 This repo contains my personal homepage.
 
-Documents Overview
-------------------
-index.html: The homepage itself, contains basic information about myself and latest projects
-404.html: 404 page
-rootmequick.html: Redirects to RootMeQuick.html (see my "RootMeQuick" project)
-tumblr.html: iFrame containing the Tumblr blog
-twitter.html: Contains twitter widget (currently does not due to accidental suspension)
-
 License
 -------
 CC BY-NC-SA: http://creativecommons.org/licenses/by-nc-sa/3.0/
