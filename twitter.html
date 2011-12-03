@@ -17,8 +17,35 @@
 				<li><a href="flattr.html">Flattr</a></li>
 			</ul>
 		</div>
-<p>My Twitter account has been accidently suspended temporarily but should be back up soon</p>
-<!-- <iframe src="http://twitter.com/EdenHJCrow" width="100%" height="100%">Failed</iframe> -->
+
+<script src="http://widgets.twimg.com/j/2/widget.js"></script>
+<script>
+new TWTR.Widget({
+  version: 2,
+  type: 'profile',
+  rpp: 30,
+  interval: 30000,
+  width: 'auto',
+  height: 0,
+  theme: {
+    shell: {
+      background: '#ffffff',
+      color: '#000000'
+    },
+    tweets: {
+      background: '#ffffff',
+      color: '#000000',
+      links: '#ff0000'
+    }
+  },
+  features: {
+    scrollbar: true,
+    loop: false,
+    live: false,
+    behavior: 'all'
+  }
+}).render().setUser('EdenHJCrow').start();
+</script>
 
 </body>
 	
