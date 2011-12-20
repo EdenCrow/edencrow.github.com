@@ -11,41 +11,53 @@
 		<h1><a href="http://edencrow.github.com/">Eden Crow</a></h1>
 		<div ID="menu">
 			<ul>
-				<li><a href="https://www.github.com/EdenCrow/">GitHub</a></li>
+				<li><a href="https://www.github.com/EdenCrow/" target="_blank">GitHub</a></li>
 				<li><a href="tumblr.html">Blog</a></li>
 				<li><a href="twitter.html">Twitter</a></li>
-				<li><a href="flattr.html">Flattr</a></li>
+				<li><a href="donate.html">Donate</a></li>
 			</ul>
 		</div>
 
 <script src="http://widgets.twimg.com/j/2/widget.js"></script>
-<script>
-new TWTR.Widget({
-  version: 2,
-  type: 'profile',
-  rpp: 30,
-  interval: 30000,
-  width: 'auto',
-  height: 0,
-  theme: {
-    shell: {
-      background: '#ffffff',
-      color: '#000000'
-    },
-    tweets: {
-      background: '#ffffff',
-      color: '#000000',
-      links: '#ff0000'
+<script> 
+	function isReply(text){
+	return text.indexOf('@') == 0
     }
-  },
-  features: {
-    scrollbar: true,
-    loop: false,
-    live: false,
-    behavior: 'all'
-  }
-}).render().setUser('EdenHJCrow').start();
-</script>
+
+
+
+new TWTR.Widget({
+version: 2,
+type: 'profile',
+ rpp: 200,
+interval: 6000,
+width: 'auto',
+height: 'auto',
+theme: {
+shell: {
+background: '#ffffff',
+color: '#000000'
+},
+tweets: {
+background: '#ffffff',
+color: '#000000',
+links: '#ff0000'
+}
+},
+features: {
+scrollbar: true,
+loop: false,
+live: true,
+hashtags: true,
+timestamp: true,
+avatars: false,
+behavior: 'all',
+filters: {negatives: {test: isReply }}
+}
+ }).render().setUser('EdenHJCrow').start();
+</script> 
+
+
 
 </body>
 	
