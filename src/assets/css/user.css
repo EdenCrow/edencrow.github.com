@@ -1,0 +1,52 @@
+/* Contact Form Style */
+#contact-form {
+    width:100%;
+}
+#contact-form input {
+    width: 100%;
+}
+#contact-form textarea {
+    width: 100%;
+    resize: none;
+}
+#submit {
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
+}
+#submit button {
+    cursor: pointer;
+}
+
+/* Back to Top */
+.back-to-top {
+    position: fixed;
+    right: 2rem;
+    bottom: 2rem;
+    cursor: pointer;
+    border-radius: 100%; 
+    border: none;
+    opacity: 100%;
+
+    transition: opacity 0.5s;
+    -webkit-transition: opacity 0.5s;
+    -moz-transition: opacity 0.5s;
+    -ms-transition: opacity 0.5s;
+   
+    transform: scale(2);
+}
+
+.hidden {
+    opacity: 0%;
+}
+
+@media (hover: hover) {
+    .back-to-top:hover
+    {
+        opacity: 60%;
+    }
+}
+
+.centered .about ul li a {
+    font-size: 3.2rem;
+}
