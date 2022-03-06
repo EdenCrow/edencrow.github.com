@@ -1,24 +1,4 @@
-/* Contact Form Style */
-#contact-form {
-    width:100%;
-}
-#contact-form input {
-    width: 100%;
-}
-#contact-form textarea {
-    width: 100%;
-    resize: none;
-}
-#submit {
-    display: flex;
-    justify-content: center;
-    margin-top: 2em;
-}
-#submit button {
-    cursor: pointer;
-}
-
-/* Back to Top */
+// Styling for back to top button
 .back-to-top {
     position: fixed;
     right: 2rem;
@@ -45,8 +25,4 @@
     {
         opacity: 60%;
     }
-}
-
-.centered .about ul li a {
-    font-size: 3.2rem;
 }

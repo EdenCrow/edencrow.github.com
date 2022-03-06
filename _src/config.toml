@@ -41,9 +41,9 @@ hideColorSchemeToggle = true
 # Series see also post count
 maxSeeAlsoItems = 5
 # Custom CSS
-customCSS = ["css/user.css"]
+# customCSS = []
 # Custom SCSS, file path is relative to Hugo's asset folder (default: {your project root}/assets)
-# customSCSS = []
+customSCSS = ["scss/personal.scss"]
 # Custom JS
 # customJS = []
 

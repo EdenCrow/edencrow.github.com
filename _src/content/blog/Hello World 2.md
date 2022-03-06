@@ -11,7 +11,7 @@ tags = [
     "bash",
     "git",
     "yaml",
-    "hugo"
+    "hugo",
     "docker",
     "caddy",
     "plausible",
@@ -57,8 +57,6 @@ I thought it best to point out a few things about this post before going further
 I should also note that I am not writing here as a guide. These are just the steps I have taken and my understanding of those steps, which could be wrong or inefficient. If you think they are, please [get in touch](/contact) -- I would love some feedback and criticism!
 {{< /notice >}}
 
-## Requirements
-It made sense to start by thinking about my requirements for the site and the tools that I would be using to build it. Otherwise, it would become too easy to get too in-depth with a method of work that didn't perform in a way that I didn't enjoy or expect. So, I made a list of what pages I wanted and the information they would convey to visitors:
 - **Home**: The landing page for new visitors. Somewhere to give a profile picture, a concise piece of information about myself and some links to my pages on other websites.
 - **About**: A more in-depth section about myself, projects and interests.
 - **Blog**: Somewhere to host posts (like this one!) that can be added to over time.
@@ -93,6 +91,14 @@ To work on my Hugo project, I would require a way to navigate through folders an
 <br/>
 {{< /rawhtml >}}
 Version control is software that tracks changes in the project over time and can be used to roll back to previous versions, [Git](https://git-scm.com/) being the most popular. In fact, I had already used Git when developing the 2012 design, using [GitHub](https://github.com/) as...
+
+To get ready to begin development on a new version of my site with Git I followed these steps:
+1. Cloned the GitHub repository with `git clone https://github.com/EdenCrow/edencrow.github.com`
+2. Made and moved into a new branch with `git checkout -b 2022`
+3. Removed all the files for the old design, keeping `CNAME`, `robots.txt` and `README` files
+4. Staged the changes with `git add -A`
+
+Now I had a clean branch to begin development with I could get it ready to work on a Hugo project with. I made a new folder called `src` (short for *source*, as-in source files), which is where I have stored the  files that Hugo will use to build the site. To get these files and folders set up correctly I then used Hugo's `new site` command.
 
 {{< notice info >}}
 While on GitHub, I also decided to upload an old Python script I made in 2012. It's a simple command-line program to search through a data dump of The Pirate Bay that user allisfine [released at the time](https://torrentfreak.com/download-a-copy-of-the-pirate-bay-its-only-90-mb-120209/). I added a couple of tweaks to parse user input better during the process.
