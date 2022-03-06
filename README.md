@@ -9,3 +9,5 @@ The site is hosted with the use of [GitHub Pages](https://pages.github.com/).
 
 ## Source Folder
 The `_src` folder contains the source files for the website *before* it has been built with Hugo.
+
+Note that the *extended version* of Hugo is required to process the `SCSS` files.

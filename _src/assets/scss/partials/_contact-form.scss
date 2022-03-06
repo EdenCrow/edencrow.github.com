@@ -1,0 +1,23 @@
+// Styling for contact form page
+#contact-form {
+    width: 100%;
+
+    input {
+        width: 100%;
+    }
+
+    textarea {
+        width: 100%;
+        resize: none;
+    }
+}
+
+#submit {
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
+
+    button {
+        cursor: pointer;
+    }
+}

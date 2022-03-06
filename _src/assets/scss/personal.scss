@@ -1,4 +1,5 @@
 // Combines the partials from the css directory into one file
-@import 'css/social-icons-fix';
-@import 'css/contact-form';
-@import 'css/back-to-top';
+@import
+    'partials/_social-icons-fix',
+    'partials/_back-to-top',
+    'partials/_contact-form';

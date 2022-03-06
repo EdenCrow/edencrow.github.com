@@ -14,15 +14,14 @@
     -ms-transition: opacity 0.5s;
    
     transform: scale(2);
+
+    &:hover {
+        @media (hover) {
+            opacity: 60%;
+        }
+    }
 }
 
 .hidden {
     opacity: 0%;
-}
-
-@media (hover: hover) {
-    .back-to-top:hover
-    {
-        opacity: 60%;
-    }
 }
