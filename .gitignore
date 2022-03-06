@@ -42,3 +42,4 @@ build/config/buildinfo.properties
 # hugo build files
 .hugo_build.lock
 _src/resources
+*.draft.md
