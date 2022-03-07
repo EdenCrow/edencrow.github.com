@@ -1,5 +1,8 @@
-// Combines the partials from the css directory into one file
 @import
     'partials/socialIconsFix',
     'partials/backToTop',
     'partials/contactForm';
+
+html, body {
+    overflow-x: hidden // Fixes some devices not using position:fixed correctly
+}
