@@ -1,0 +1,31 @@
+{
+  "name": "edencrow.github.com",
+  "version": "1.0.0",
+  "description": "Personal homepage for Eden Crow",
+  "hugo-bin": {
+    "buildTags": "extended"
+  },
+  "scripts": {
+    "build": "npm run hugo:build",
+    "clean": "npm run hugo:clean",
+    "serve": "npm run hugo:serve",
+    "hugo:build": "hugo",
+    "hugo:create": "hugo new",
+    "hugo:serve": "hugo server",
+    "hugo: clean": "rm -rf build resources public",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EdenCrow/edencrow.github.com.git"
+  },
+  "author": "Eden Crow",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/EdenCrow/edencrow.github.com/issues"
+  },
+  "homepage": "https://github.com/EdenCrow/edencrow.github.com#readme",
+  "devDependencies": {
+    "hugo-bin": "^0.82.1"
+  }
+}
