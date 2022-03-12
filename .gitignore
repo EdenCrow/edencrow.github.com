@@ -7,3 +7,6 @@ resources
 
 # mark draft posts not for publishing
 *.draft.md
+
+# built js bundles
+*.bundle.js*
