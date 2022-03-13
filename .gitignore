@@ -4,6 +4,7 @@ node_modules
 # hugo build files
 .hugo_build.lock
 resources
+public
 
 # mark draft posts not for publishing
 *.draft.md

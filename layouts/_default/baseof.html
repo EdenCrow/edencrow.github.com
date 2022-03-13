@@ -113,25 +113,15 @@
       {{ partial "footer.html" . }}
     </main>
 
+    <!-- START JS -->
     {{ if .Site.IsServer }}
-      {{ $script := resources.Get "js/coder.js" }}
+      {{ $script := resources.Get "js/global.bundle.js" }}
       <script defer src="{{ $script.RelPermalink }}"></script>
     {{ else }}
-      {{ $script := resources.Get "js/coder.js" | minify | fingerprint }}
+      {{ $script := resources.Get "js/global.bundle.js" | minify | fingerprint }}
       <script defer src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}"></script>
     {{ end }}
 
-    {{ range .Site.Params.customJS }}
-      {{ if $.Site.IsServer }}
-        {{ $script := resources.Get . }}
-        <script src="{{ $script.RelPermalink }}"></script>
-      {{ else }}
-        {{ $script := resources.Get . | minify | fingerprint }}
-        <script src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}"></script>
-      {{ end }}
-    {{ end }}
-
-    <!-- Custom JS -->
     {{ if eq .Section "blog" }}
       {{ if $.Site.IsServer }}
         {{ $script := resources.Get "js/blog.bundle.js" }}
@@ -144,14 +134,14 @@
 
     {{ if eq .Section "contact" }}
       {{ if $.Site.IsServer }}
-        {{ $script := resources.Get "js/contactform.js" }}
-        <script src="{{ $script.RelPermalink }}"></script>
+        {{ $script := resources.Get "js/contact.bundle.js" }}
+        <script defer src="{{ $script.RelPermalink }}"></script>
       {{ else }}
-        {{ $script := resources.Get "js/contactform.js" | minify | fingerprint }}
-        <script src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}"></script>
+        {{ $script := resources.Get "js/contact.bundle.js" | minify | fingerprint }}
+        <script defer src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}"></script>
       {{ end }}  
     {{ end }}
-    <!-- END Custom JS -->
+    <!-- END JS -->
 
     {{ template "_internal/google_analytics.html" . }}
 
