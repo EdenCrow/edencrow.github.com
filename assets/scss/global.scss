@@ -6,3 +6,8 @@
 html, body {
     overflow-x: hidden // Fixes some devices not using position:fixed correctly
 }
+
+figcaption {
+    font-size: 95%;
+    font-style: italic;
+}

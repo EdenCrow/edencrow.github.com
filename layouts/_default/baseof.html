@@ -115,10 +115,10 @@
 
     {{ if .Site.IsServer }}
       {{ $script := resources.Get "js/coder.js" }}
-      <script src="{{ $script.RelPermalink }}"></script>
+      <script defer src="{{ $script.RelPermalink }}"></script>
     {{ else }}
       {{ $script := resources.Get "js/coder.js" | minify | fingerprint }}
-      <script src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}"></script>
+      <script defer src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}"></script>
     {{ end }}
 
     {{ range .Site.Params.customJS }}
@@ -135,10 +135,10 @@
     {{ if eq .Section "blog" }}
       {{ if $.Site.IsServer }}
         {{ $script := resources.Get "js/blog.bundle.js" }}
-          <script src="{{ $script.RelPermalink }}"></script>
+          <script defer src="{{ $script.RelPermalink }}"></script>
       {{ else }}
         {{ $script := resources.Get "js/blog.bundle.js" | minify | fingerprint }}
-        <script src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}"></script>
+        <script defer src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}"></script>
       {{ end }}
     {{ end }}
 
