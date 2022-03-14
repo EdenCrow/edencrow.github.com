@@ -6,11 +6,13 @@
     "buildTags": "extended"
   },
   "scripts": {
-    "build": "webpack --mode=production && npm run hugo:build",
-    "serve": "concurrently \"webpack --mode=development --watch\" \"npm:hugo:serve\" -k",
+    "build": "npm run squoosh && webpack --mode=production && npm run hugo:build",
+    "serve": "npm run squoosh && concurrently \"webpack --mode=development --watch\" \"npm:hugo:serve\" -k",
+    "squoosh": "npm run squoosh:blogImages",
     "hugo:build": "hugo  --cleanDestinationDir --minify",
     "hugo:create": "hugo new",
     "hugo:serve": "hugo server",
+    "squoosh:blogImages": "node scripts/squoosh.js ./static/images/blogImages",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,12 +26,13 @@
   },
   "homepage": "https://github.com/EdenCrow/edencrow.github.com#readme",
   "devDependencies": {
+    "concurrently": "^7.0.0",
     "hugo-bin": "^0.82.1",
     "webpack": "^5.70.0",
-    "webpack-cli": "^4.9.2",
-    "concurrently": "^7.0.0"
+    "webpack-cli": "^4.9.2"
   },
   "dependencies": {
+    "@squoosh/lib": "^0.4.0",
     "medium-zoom": "^1.0.6"
   }
 }

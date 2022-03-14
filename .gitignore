@@ -9,5 +9,8 @@ public
 # mark draft posts not for publishing
 *.draft.md
 
+# processed images
+squoosh/
+
 # built js bundles
 *.bundle.js*

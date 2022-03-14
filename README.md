@@ -8,22 +8,12 @@ It uses [Hugo-Coder](https://github.com/luizdepra/hugo-coder) by Luiz F. A. de P
 The site is hosted with the use of [GitHub Pages](https://pages.github.com/).
 
 ## Notes on Blog Images
-Full sized images should be placed in `static/images/blogImages`.
-
-These images should then be reduced in size with [squoosh](https://github.com/GoogleChromeLabs/squoosh), preferably by running the following command from the `blogImages` directory:
-
-``` bash
- npx @squoosh/cli --mozjpeg '{quality:50}' -d squoosh ./[imageName]
-```
-
-Make sure to replace `[imageName]` with the name of the image file, including file extension.
-
-This will create our minimised image in `static/images/blogImages/squoosh`.
+Full sized blog images should be placed in `static/images/blogImages`. Images will be compressed at build/serve with [squoosh](https://github.com/GoogleChromeLabs/squoosh).
 
 To insert the image into the blogpost we use the line:
 
 ``` go
-{{< image name="[filename]" alt="[altText]" caption="[captionText]" originalFiletype="[originalFileExtension]" squooshFiletype="[squooshFileExtension]" >}}
+{{< image name="[filename]" alt="[altText]" caption="[captionText]" originalFiletype="[originalFileExtension]" >}}
 ```
 
 [Required]
@@ -33,4 +23,3 @@ To insert the image into the blogpost we use the line:
 
 [Optional]
 - `originalFiletype` is the file extension for the original file (otherwise defaults to `png`)
-- `squooshFiletype` is the file extension for the minimised file (otherwise defaults to `jpg`)
