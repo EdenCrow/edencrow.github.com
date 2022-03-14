@@ -6,6 +6,10 @@
         {{ else }}
             data-zoom-src='/images/blogImages/src/{{ .Get "name"}}.png'
         {{ end }}
-        alt='{{ .Get "alt" }}'>
+        alt='{{ .Get "alt" }}'
+        {{ if .Get "lazy" }}
+            loading="lazy"
+        {{ end }}
+    >
     <figcaption>{{ .Get "caption" }}</figcaption>
 </figure>

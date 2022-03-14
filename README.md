@@ -13,7 +13,7 @@ Full sized blog images should be placed in `static/images/blogImages`. Images wi
 To insert the image into the blogpost we use the line:
 
 ``` go
-{{< image name="[filename]" alt="[altText]" caption="[captionText]" originalFiletype="[originalFileExtension]" >}}
+{{< image name="[filename]" alt="[altText]" caption="[captionText]" originalFiletype="[originalFileExtension]" lazy="true" >}}
 ```
 
 [Required]
@@ -23,3 +23,4 @@ To insert the image into the blogpost we use the line:
 
 [Optional]
 - `originalFiletype` is the file extension for the original file (otherwise defaults to `png`)
+- `lazy` if defined with any value will give the image the `loading=lazy` attribute
