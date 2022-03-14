@@ -44,8 +44,6 @@ maxSeeAlsoItems = 5
 # customCSS = []
 # Custom SCSS, file path is relative to Hugo's asset folder (default: {your project root}/assets)
 customSCSS = ["scss/global.scss"]
-# Custom JS
-# customJS = []
 
 # If you want to use plausible(https://plausible.io) for analytics, add this section
 # [params.plausibleAnalytics]
@@ -85,8 +83,7 @@ url = "https://twitter.com/EdenHJCrow/"
 
 [[params.social]]
 name = "Letterboxd"
-image = "/images/social/letterboxd-white.svg"
-onmouseover = "/images/social/letterboxd-rollover.svg"
+svg = "./static/images/social/letterboxd-white.svg"
 alt = "Letterboxd"
 weight = 2
 url = "https://letterboxd.com/EdenCrow/"

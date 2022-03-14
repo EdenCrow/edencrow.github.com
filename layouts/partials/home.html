@@ -17,11 +17,11 @@
     {{ with .Site.Params.social }}
     <ul>
       {{ range sort . "weight" }}
-         {{ if .image }}
-         <li>
-          <a onmouseover="document.getElementById('{{ .alt }}').src='{{ .onmouseover }}'" onmouseout="document.getElementById('{{ .alt }}').src='{{ .image }}'" href="{{ .url | safeURL }}" aria-label="{{ .name }}" {{ if .rel }}rel="{{ .rel }}"{{ end }} {{ if .target }}target="{{ .target }}"{{ end }} {{ if .type }}type="{{ .type }}"{{ end }}>
-            <img style="transform: translateY(8%)" id="{{ .alt }}" src="{{ .image }}" height="28" width="28" alt="{{ .alt }}">
-          </a>
+         {{ if .svg }}
+          <li>
+            <a class="svgImage" id="{{.name}}" href="{{ .url | safeURL }}" aria-label="{{ .name }}" {{ if .rel }}rel="{{ .rel }}"{{ end }} {{ if .target }}target="{{ .target }}"{{ end }} {{ if .type }}type="{{ .type }}"{{ end }}>
+              {{.svg | readFile | safeHTML}}
+            </a>
           </li>
       
         {{ else if .icon }}

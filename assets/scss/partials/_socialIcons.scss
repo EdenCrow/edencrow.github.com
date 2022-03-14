@@ -1,0 +1,23 @@
+.centered .about ul li a {
+    font-size: 3.2rem;
+}
+
+.svgImage svg {
+    height: 28px;
+    width: 28px;
+    transform: translateY(8%);
+}
+
+#Letterboxd {
+
+    #Circle, #Overlap {
+        fill: #dadada;
+        transition: fill 0.5s;
+    }
+
+    :hover {
+        #Circle, #Overlap {
+            fill: #42a5f5;
+        }
+    }
+}

@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <svg width="500px" height="500px" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>letterboxd-decal-dots-neg-mono</title>
     <defs>
         <rect id="path-1" x="0" y="0" width="129.847328" height="141.443299"></rect>
         <rect id="path-3" x="0" y="0" width="129.847328" height="141.443299"></rect>
     </defs>
-    <g id="letterboxd-decal-dots-neg-mono" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <circle id="Circle" fill="#dadada" cx="250" cy="250" r="250"></circle>
         <g id="Dots" transform="translate(61.000000, 180.000000)">
             <ellipse id="Green" fill="#202830" cx="189" cy="70" rx="70.0786517" ry="70"></ellipse>
