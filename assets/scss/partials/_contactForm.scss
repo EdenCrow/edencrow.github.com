@@ -12,12 +12,34 @@
     }
 }
 
-#submit {
+.h-captcha {
     display: flex;
     justify-content: center;
     margin-top: 2em;
+}
 
-    button {
-        cursor: pointer;
+#submitContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
+}
+
+#submit {
+    cursor: pointer;
+}
+
+.fa-spinner {
+    animation-name: spin;
+    animation-duration: 2500ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear; 
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
     }
 }
