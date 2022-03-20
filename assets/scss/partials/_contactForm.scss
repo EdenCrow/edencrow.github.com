@@ -1,45 +1,54 @@
 // Styling for contact form page
 #contact-form {
+  width: 100%;
+
+  input {
     width: 100%;
+  }
 
-    input {
-        width: 100%;
-    }
-
-    textarea {
-        width: 100%;
-        resize: none;
-    }
+  textarea {
+    width: 100%;
+    resize: none;
+  }
 }
 
 .h-captcha {
-    display: flex;
-    justify-content: center;
-    margin-top: 2em;
+  display: flex;
+  justify-content: center;
+  margin-top: 2em;
 }
 
 #submitContainer {
-    display: flex;
-    justify-content: center;
-    margin-top: 2em;
+  display: flex;
+  justify-content: center;
+  margin-top: 2em;
 }
 
 #submit {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .fa-spinner {
-    animation-name: spin;
-    animation-duration: 2500ms;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear; 
+  animation-name: spin;
+  animation-duration: 2500ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 
 @keyframes spin {
-    from {
-        transform:rotate(0deg);
-    }
-    to {
-        transform:rotate(360deg);
-    }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
+
+.blinkBorder {
+    border: 1px #ff0000 solid;
+    
+    animation: blink 0.35s;
+    animation-iteration-count: 2;
+}
+
+@keyframes blink { 50% { border-color:#fff ; }  }
