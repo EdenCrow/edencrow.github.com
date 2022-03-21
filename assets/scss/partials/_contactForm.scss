@@ -52,3 +52,11 @@
 }
 
 @keyframes blink { 50% { border-color:#fff ; }  }
+
+.errorMessage {
+  background-color: red;
+}
+
+.successMessage {
+  background-color: green;
+}

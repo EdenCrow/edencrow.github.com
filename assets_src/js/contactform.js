@@ -1,64 +1,109 @@
 import isEmail from "validator/lib/isEmail";
 
-const form = document.getElementById("formData");
-const submitButton = document.getElementById("submit");
-const messageBox = document.getElementById("messages");
+// Set div IDs
+// NOTE: name and ID must match on form inputs HTML
+const submitID = "submit";
+const infoID = "infoBox";
+const formID = "formData";
+const nameID = "name";
+const emailID = "email";
+const messageID = "message";
+const errorClass = "errorMessage";
+const textErrorClass = "blinkBorder";
+const successClass = "successMessage";
 
+// Set changeable vars
 const url = "https://contact.edencrow.info";
+const processedMessage =
+  '<i class="fa fa-spinner" aria-hidden="true"></i> Processing';
 
-function processingButton() {
-  submitButton.innerHTML =
-    '<i class="fa fa-spinner" aria-hidden="true"></i> Processing';
-  submitButton.style.cursor = "default";
-  submitButton.disabled = true;
-  return;
-}
-
-function processedButton() {
-  submitButton.innerHTML =
-    '<i class="fa fa-paper-plane-o" aria-hidden="true"></i> Submit';
-  submitButton.style.cursor = "pointer";
-  submitButton.disabled = false;
-  return;
-}
-
-function showError(error) {
-  processedButton();
-  messageBox.innerHTML = error;
-}
-
-function showNullData(nullData) {
-  let div;
-  for (let key of nullData) {
-    if (key !== "h-captcha") {
-      div = document.getElementById(key);
-
-      div.classList.add("blinkBorder");
-
-      div.addEventListener(
-        "blur",
-        function () {
-          if (this.value !== "") {
-            this.classList.remove("blinkBorder");
-            this.removeEventListener;
-          }
-        },
-        { once: true }
-      );
-    } else if (key === "h-captcha") {
-      // Somehow style hCaptcha?
-    }
+// Setup classes for elements
+class Button {
+  constructor(id, processingText) {
+    this.element = document.getElementById(id);
+    this.processingText = processingText;
+    this.processedText = this.element.innerHTML;
+  }
+  processing() {
+    this.element.innerHTML = this.processingText;
+    this.element.style.cursor = "default";
+    this.element.disabled = true;
+  }
+  processed() {
+    this.element.innerHTML = this.processedText;
+    this.element.style.cursor = "pointer";
+    this.element.disabled = false;
   }
 }
 
-function onSuccess() {
-  processedButton();
-  messageBox.innerHTML = "😊";
+class InfoBox {
+  constructor(id) {
+    this.element = document.getElementById(id);
+  }
+  displayError(inner) {
+    this.element.classList.add(errorClass);
+    this.element.innerHTML = inner;
+  }
+  displaySuccess(inner) {
+    this.element.classList.add(successClass);
+    this.element.innerHTML = inner;
+  }
+  empty() {
+    this.element.classList.remove(errorClass, successClass);
+    this.element.innerHTML = "";
+  }
 }
 
+class TextInput {
+  constructor(id) {
+    this.element = document.getElementById(id);
+  }
+  error() {
+    this.element.classList.add(textErrorClass);
+    this.element.addEventListener(
+      "blur",
+      function () {
+        if (this.value !== "") {
+          this.classList.remove(textErrorClass);
+        }
+      },
+      { once: true }
+    );
+  }
+}
+
+// Set instances of element classes
+const submitButton = new Button(submitID, processedMessage);
+const messageBox = new InfoBox(infoID);
+const form = document.getElementById(formID); // TODO?
+const nameInput = new TextInput(nameID);
+const emailInput = new TextInput(emailID);
+const messageInput = new TextInput(messageID);
+
+// Create object of inputs
+const inputObject = {
+  [nameID]: nameInput,
+  [emailID]: emailInput,
+  [messageID]: messageInput,
+};
+
+// Handling form errors/success
+function showError(error) {
+  submitButton.processed();
+  messageBox.displayError(error);
+}
+
+function onSuccess() {
+  submitButton.processed();
+  form.remove();
+  messageBox.displaySuccess("😊");
+}
+
+// Main function to deal with form
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  processingButton();
+  submitButton.processing();
+  messageBox.empty();
 
   let data = new FormData(form);
   data.delete("g-recaptcha-response"); // Why is this added?
@@ -77,7 +122,13 @@ form.addEventListener("submit", (event) => {
       dataNull[hcaptchaIndex] = "h-captcha";
     }
     showError("Missing:<br>" + dataNull.join("<br>"));
-    showNullData(dataNull);
+    for (let key of dataNull) {
+      if (key !== "h-captcha") {
+        inputObject[key].error();
+      } else if (key === "h-captcha") {
+        // Somehow style hCaptcha?
+      }
+    }
     return;
   }
 
@@ -93,7 +144,7 @@ form.addEventListener("submit", (event) => {
   });
   if (!isValid) {
     showError("Invalid E-mail");
-    showNullData(["email"]);
+    emailInput.error();
     return;
   }
 
