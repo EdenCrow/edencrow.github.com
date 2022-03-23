@@ -1,23 +1,19 @@
 import isEmail from "validator/lib/isEmail";
 
 // Set div IDs
-// NOTE: name and ID must match on form inputs HTML
-const submitID = "submit";
-const infoID = "infoBox";
 const formID = "formData";
-const nameID = "name";
 const emailID = "email";
-const messageID = "message";
-const errorClass = "errorMessage";
-const textErrorClass = "blinkBorder";
-const successClass = "successMessage";
+const submitID = "submit";
+
+// Set CSS classes
+const textErrorClass = "errorText";
+const inputErrorClass = "blinkBorder";
 
 // Set changeable vars
-const url = "https://contact.edencrow.info";
 const processedMessage =
   '<i class="fa fa-spinner" aria-hidden="true"></i> Processing';
 
-// Setup classes for elements
+// Setup classes for form elements
 class Button {
   constructor(id, processingText) {
     this.element = document.getElementById(id);
@@ -36,213 +32,136 @@ class Button {
   }
 }
 
-class InfoBox {
-  constructor(id) {
-    this.element = document.getElementById(id);
-  }
-  displaySuccess(inner) {
-    this.element.classList.add(successClass);
-    this.element.innerHTML = inner;
-  }
-  displayError(errors) {
-    this.element.classList.add(errorClass);
-
-    let missingValues = [];
-    for (const [key, value] of Object.entries(errors.entered)) {
-      if (value === false) {
-        missingValues.push(key);
-      }
-    }
-
-    let displayMessage = "Error";
-    if (missingValues.length > 0) {
-      displayMessage = displayMessage.concat(
-        "<br>Missing:<br>" + missingValues.join("<br>")
-      );
-    }
-    if (errors.entered.email === true && errors.validemail === false) {
-      displayMessage = displayMessage.concat("<br/>Invalid Email");
-    }
-    this.element.innerHTML = displayMessage;
-  }
-  empty() {
-    this.element.classList.remove(errorClass, successClass);
-    this.element.innerHTML = "";
-  }
-}
-
 class TextInput {
   constructor(id) {
     this.element = document.getElementById(id);
+    this.isError = false;
     this.removeClass = function (e) {
       if (this.value !== "") {
-        e.target.classList.remove(textErrorClass);
+        e.target.classList.remove(inputErrorClass);
       }
     };
     this.removeHandler = this.removeClass.bind(this);
   }
-  error() {
-    this.element.classList.add(textErrorClass);
+  error(errorType) {
+    this.isError = true;
+    this.element.classList.add(inputErrorClass);
     this.element.addEventListener("blur", this.removeHandler);
+    let errorMessage = "";
+    switch (errorType) {
+      case 0:
+        errorMessage = `Missing ${this.element.id}!`;
+        break;
+      case 1:
+        errorMessage = `Invalid ${this.element.id}!`;
+        break;
+      default:
+        errorMessage = "Undefined Error";
+    }
+    this.element.insertAdjacentHTML(
+      "afterend",
+      `<div id="errorText${this.element.id}" class="${textErrorClass}">${errorMessage}</div>`
+    );
   }
   reset() {
-    this.element.classList.remove(textErrorClass);
-    this.element.removeEventListener("blur", this.removeHandler);
+    if (this.isError) {
+      this.element.classList.remove(inputErrorClass);
+      this.element.removeEventListener("blur", this.removeHandler);
+      let removeID = "errorText" + this.element.id;
+      document.getElementById(removeID).remove();
+    }
+  }
+
+  noError() {
+    this.isError = false;
   }
 }
 
-// Set instances of element classes
-const submitButton = new Button(submitID, processedMessage);
-const messageBox = new InfoBox(infoID);
-const nameInput = new TextInput(nameID);
-const emailInput = new TextInput(emailID);
-const messageInput = new TextInput(messageID);
-
-// Create object of inputs
-const inputObject = {
-  [nameID]: nameInput,
-  [emailID]: emailInput,
-  [messageID]: messageInput,
-};
-
-// Get Form
+// Get form and submit
 const form = document.getElementById(formID);
+const submitButton = new Button(submitID, processedMessage);
 
-// Handling form errors/success
-function showError(error) {
-  submitButton.processed();
-  messageBox.displayError(error);
-}
-function onSuccess() {
-  submitButton.processed();
-  form.remove();
-  messageBox.displaySuccess("😊");
+// Setup input classes
+const formFields = new FormData(form);
+let fieldClasses = [];
+for (let pair of formFields.entries()) {
+  let field = pair[0];
+  let textClassName = field + "Input";
+  window[textClassName] = new TextInput(field);
+  fieldClasses.push(window[textClassName]);
 }
 
-// Main function to deal with form
-form.addEventListener("submit", (event) => {
+// Validation functions
+function checkEmpty(formData) {
+  let emptyValues = [];
+  for (let pair of formData.entries()) {
+    let inputKey = pair[0];
+    let inputClassName = pair[0] + "Input";
+    let inputValue = pair[1];
+
+    if (inputValue === undefined || inputValue === null || inputValue === "") {
+      emptyValues.push(inputKey);
+      if (inputKey != "h-captcha-response") {
+        window[inputClassName].error(0);
+      } else {
+        // Give hCaptcha error
+        console.log("hcaptcha error");
+      }
+    } else {
+      if (inputKey != "h-captcha-response") {
+        window[inputClassName].noError();
+      } else {
+        // hCaptcha no error
+      }
+    }
+  }
+  return emptyValues;
+}
+
+function validateEmail(email) {
+  let isValid = isEmail(email, {
+    require_tld: false,
+    ignore_max_length: true,
+    allow_ip_domain: true,
+  });
+  if (!isValid) {
+    emailInput.error(1);
+  } else {
+    emailInput.noError();
+    return isValid;
+  }
+}
+
+// Main function
+form.addEventListener(submitID, (event) => {
   event.preventDefault();
 
-  // Reset visuals
-  for (let [, value] of Object.entries(inputObject)) {
-    value.reset();
-  }
+  fieldClasses.forEach((item) => {
+    item.reset();
+  });
   submitButton.processing();
-  messageBox.empty();
 
   // Get form data
-  let data = new FormData(form);
-  data.delete("g-recaptcha-response"); // Why is this added?
+  let formData = new FormData(form);
+  formData.delete("g-recaptcha-response"); // Why is this included?
 
-  // Error checking vars
-  let formErrors = false;
-  let errors = {
-    entered: {
-      [nameID]: false,
-      [emailID]: false,
-      [messageID]: false,
-      captcha: false,
-    },
-    validemail: false,
-  };
+  // Check if data is empty
+  let emptyValues = checkEmpty(formData);
 
-  // Verify info entered
-  let dataNull = [];
-  for (var pair of data.entries()) {
-    if (pair[1] === undefined || pair[1] === null || pair[1] === "") {
-      dataNull.push(pair[0]);
-    } else if (pair[1] !== undefined || pair[1] !== null || pair[1] !== "") {
-      if (pair[0] === "h-captcha-response") {
-        errors.entered.captcha = true;
-      } else {
-        errors.entered[pair[0]] = true;
-      }
-    }
+  // Check if email is valid if email field present
+  let validEmail = false;
+  if (formData.get(emailID) === null) {
+    validEmail = true;
+  } else if ((!emptyValues.includes(emailID))) {
+      validEmail = validateEmail(formData.get(emailID));
   }
 
-  // Not all info entered
-  if (dataNull.length > 0) {
-    formErrors = true;
-
-    // Get hCaptcha friendly name if present in dataNull
-    let hcaptchaIndex = dataNull.findIndex((x) => x === "h-captcha-response");
-    if (hcaptchaIndex !== -1) {
-      dataNull[hcaptchaIndex] = "h-captcha";
-    }
-
-    // Give input error box if in dataNull
-    for (let key of dataNull) {
-      if (key !== "h-captcha") {
-        inputObject[key].error();
-      } else if (key === "h-captcha") {
-        // Somehow style hCaptcha?
-      }
-    }
-  }
-
-  // Verify email if entered
-  if (errors.entered.email) {
-    let isValid = isEmail(data.get("email"), {
-      require_tld: false,
-      ignore_max_length: true,
-      allow_ip_domain: true,
-    });
-    if (!isValid) {
-      formErrors = true;
-      emailInput.error();
-      inputObject.email.error();
-    } else {
-      errors.validemail = true;
-    }
-  }
-
-  // Exit and show errors if any errors present
-  if (formErrors) {
-    showError(errors);
+  // Espace function if any values empty or email is not valid
+  if (emptyValues.length > 0 || !validEmail) {
+    submitButton.processed();
     return;
   }
 
-  // Convert JSON to JSON string
-  let dataObj = {};
-  data.forEach((value, key) => (dataObj[key] = value));
-  let dataJSON = JSON.stringify(dataObj);
-
-  // Open request
-  let request = new XMLHttpRequest();
-  request.open("POST", url);
-
-  // How to deal with response
-  request.onload = function () {
-    let statusCode = this.status;
-    let response = JSON.parse(this.response);
-
-    let returnError = true;
-    let errorMessage = "";
-    switch (statusCode) {
-      case 200: // Success
-        onSuccess();
-        break;
-      case 400: // Bad info
-        errorMessage = "Bad info: " + response.error;
-        break;
-      case 500: // Server error
-        errorMessage = "Server error: " + response.error;
-        break;
-      default:
-        // Other
-        errorMessage = "Other error: " + statusCode;
-    }
-    if (returnError) {
-      showError(errorMessage);
-    }
-  };
-
-  // How to deal with error
-  request.onerror = function () {
-    showError("XMLHttp Error");
-  };
-
-  // Send request
-  request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  request.send(dataJSON);
+  // Input is valid
+  console.log("valid");
 });
