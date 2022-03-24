@@ -2,15 +2,21 @@ import isEmail from "validator/lib/isEmail";
 
 // Set div IDs
 const formID = "formData";
-const emailID = "email";
 const submitID = "submit";
+
+// Set if checking email and email field id
+const checkEmail = true;
+const emailID = "email";
 
 // Set CSS classes
 const textErrorClass = "errorText";
 const inputErrorClass = "blinkBorder";
 
+// Set captcha info
+const captchaArray = ["h-captcha-response", "g-recaptcha-response"];
+
 // Set changeable vars
-const processedMessage =
+const processingMessage =
   '<i class="fa fa-spinner" aria-hidden="true"></i> Processing';
 
 // Setup classes for form elements
@@ -36,13 +42,29 @@ class TextInput {
   constructor(id) {
     this.element = document.getElementById(id);
     this.isError = false;
-    this.removeClass = function (e) {
-      if (this.value !== "") {
+
+    // Setup error message text
+    this.errorTextID = "errorText" + id;
+    this.errorMessageDefault = "<br/>";
+    this.element.insertAdjacentHTML(
+      "afterend",
+      `<div id="${this.errorTextID}" class="${textErrorClass}">${this.errorMessageDefault}</div>`
+    );
+    this.errorMessageDiv = document.getElementById(this.errorTextID);
+
+    // Removes error message on blur if not empty
+    this.removeError = function (e) {
+      let currentValue = this.element.value.trim();
+      if (currentValue.length > 0) {
         e.target.classList.remove(inputErrorClass);
+        this.errorMessageDiv.innerHTML = this.errorMessageDefault;
+        this.isError = false;
       }
     };
-    this.removeHandler = this.removeClass.bind(this);
+    this.removeHandler = this.removeError.bind(this);
   }
+
+  // Shows relevant error message
   error(errorType) {
     this.isError = true;
     this.element.classList.add(inputErrorClass);
@@ -58,28 +80,24 @@ class TextInput {
       default:
         errorMessage = "Undefined Error";
     }
-    this.element.insertAdjacentHTML(
-      "afterend",
-      `<div id="errorText${this.element.id}" class="${textErrorClass}">${errorMessage}</div>`
-    );
+    this.errorMessageDiv.innerHTML = errorMessage;
   }
+
+  // Remove error messages
   reset() {
+    this.element.blur();
     if (this.isError) {
       this.element.classList.remove(inputErrorClass);
       this.element.removeEventListener("blur", this.removeHandler);
-      let removeID = "errorText" + this.element.id;
-      document.getElementById(removeID).remove();
+      this.errorMessageDiv.innerHTML = this.errorMessageDefault;
+      this.isError = false;
     }
-  }
-
-  noError() {
-    this.isError = false;
   }
 }
 
 // Get form and submit
 const form = document.getElementById(formID);
-const submitButton = new Button(submitID, processedMessage);
+const submitButton = new Button(submitID, processingMessage);
 
 // Setup input classes
 const formFields = new FormData(form);
@@ -97,21 +115,16 @@ function checkEmpty(formData) {
   for (let pair of formData.entries()) {
     let inputKey = pair[0];
     let inputClassName = pair[0] + "Input";
-    let inputValue = pair[1];
+    let inputValue = pair[1].trim();
 
-    if (inputValue === undefined || inputValue === null || inputValue === "") {
+    if (inputValue.length === 0) {
       emptyValues.push(inputKey);
-      if (inputKey != "h-captcha-response") {
+      if (!captchaArray.includes(inputKey)) {
         window[inputClassName].error(0);
+        window[inputClassName].element.value = "";
       } else {
         // Give hCaptcha error
-        console.log("hcaptcha error");
-      }
-    } else {
-      if (inputKey != "h-captcha-response") {
-        window[inputClassName].noError();
-      } else {
-        // hCaptcha no error
+        console.log("captcha error");
       }
     }
   }
@@ -126,34 +139,34 @@ function validateEmail(email) {
   });
   if (!isValid) {
     emailInput.error(1);
-  } else {
-    emailInput.noError();
-    return isValid;
   }
+  return isValid;
 }
 
 // Main function
 form.addEventListener(submitID, (event) => {
   event.preventDefault();
 
+  // Reset error messages
   fieldClasses.forEach((item) => {
     item.reset();
   });
+
+  // Change button
   submitButton.processing();
 
   // Get form data
   let formData = new FormData(form);
-  formData.delete("g-recaptcha-response"); // Why is this included?
 
   // Check if data is empty
   let emptyValues = checkEmpty(formData);
 
   // Check if email is valid if email field present
   let validEmail = false;
-  if (formData.get(emailID) === null) {
+  if (!checkEmail) {
     validEmail = true;
-  } else if ((!emptyValues.includes(emailID))) {
-      validEmail = validateEmail(formData.get(emailID));
+  } else if (!emptyValues.includes(emailID)) {
+    validEmail = validateEmail(formData.get(emailID));
   }
 
   // Espace function if any values empty or email is not valid
