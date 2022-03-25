@@ -44,16 +44,33 @@
   }
 }
 
-.blinkBorder {
-    border: 1px #ff0000 solid;
-    
-    animation: blink 0.35s;
-    animation-iteration-count: 2;
+.blink {
+  animation: blink 0.35s;
+  animation-iteration-count: 2;
 }
 
-@keyframes blink { 50% { border-color:#fff ; }  }
+.blinkBorder {
+  @extend .blink;
+  border: 1px #ff0000 solid;
+}
+.captchaBlinkBorder > iframe {
+  @extend .blink;
+  outline: 2px #ff0000 solid;
+}
+
+@keyframes blink {
+  50% {
+    border-color: #fff;
+    outline: #fff;
+  }
+}
 
 .errorText {
   font-size: 0.75em;
-  color: red;
+  color: #ff0000;
+  backface-visibility: hidden;
+  &--captcha {
+    @extend .errorText;
+    text-align: center;
+  }
 }
