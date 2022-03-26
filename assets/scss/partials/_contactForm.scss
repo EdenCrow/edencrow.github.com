@@ -44,33 +44,40 @@
   }
 }
 
+$errorColour: #ff0000;
+$flashColour: #fff;
+
 .blink {
   animation: blink 0.35s;
   animation-iteration-count: 2;
+  & + div {
+    font-size: 0.75em;
+    color: $errorColour;
+    backface-visibility: hidden;
+  }
 }
 
 .blinkBorder {
   @extend .blink;
-  border: 1px #ff0000 solid;
+  border: 1px $errorColour solid;
 }
-.captchaBlinkBorder > iframe {
+
+.captchaBlinkBorder {
   @extend .blink;
-  outline: 2px #ff0000 solid;
+  & + div {
+    margin: auto;
+    width: 50%;
+    text-align: center;
+  }
+  & > iframe {
+    @extend .blink;
+    outline: 2px $errorColour solid;
+  }
 }
 
 @keyframes blink {
   50% {
-    border-color: #fff;
-    outline: #fff;
-  }
-}
-
-.errorText {
-  font-size: 0.75em;
-  color: #ff0000;
-  backface-visibility: hidden;
-  &--captcha {
-    @extend .errorText;
-    text-align: center;
+    border-color: $flashColour;
+    outline: $flashColour;
   }
 }
