@@ -14,6 +14,10 @@ const captchaInputErrorClass = "captchaBlinkBorder";
 // Set loading icon
 const spinner = '<i class="fa fa-spinner" aria-hidden="true"></i>';
 
+// Set URL
+// const URL = "https://contact.edencrow.info";
+const URL = "http://localhost:9876";
+
 // Setup captcha array for checking against
 const captchaArray = ["h-captcha-response", "g-recaptcha-response", captchaID];
 
@@ -155,8 +159,48 @@ function validateEmail(email) {
   return isValid;
 }
 
+// Functions to deal with Fetch response
+function handleResponseError(data) {
+  submitButton.processed();
+  let validateEmail = true;
+
+  for (let [key, value] of Object.entries(data)) {
+    switch (key) {
+      case "missing":
+        value.forEach((missingEntry) => {
+          if (missingEntry === "token") {
+            missingEntry = "captcha";
+          } else if (missingEntry === "email") {
+            validateEmail = false;
+          }
+          let inputClassName = missingEntry + "Input";
+          window[inputClassName].error(0);
+        });
+      case "validEmail":
+        if (validateEmail) {
+          emailInput.error(1);
+        }
+      case "captcha":
+        if (value === -1) {
+          captchaInput.error(0);
+        } else if (value === 0) {
+          // TODO: captcha server error
+        }
+        break;
+      default:
+        // TODO: other errors
+        break;
+    }
+  }
+}
+
+function handleResponseSuccess() {
+  // TODO: Show success message
+  form.remove();
+}
+
 // Main function
-form.addEventListener(submitID, (event) => {
+form.addEventListener(submitID, async (event) => {
   event.preventDefault();
 
   // Reset error messages
@@ -192,6 +236,20 @@ form.addEventListener(submitID, (event) => {
     return;
   }
 
-  // Input is valid
+  // Input is valid => send form
   submitButton.processing();
+  fetch(URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(Object.fromEntries(formData)),
+  })
+    .then((result) =>
+      result
+        .json()
+        .then((jsonResult) =>
+          jsonResult.error ? handleResponseError(jsonResult.errors) : handleResponseSuccess()
+        )
+    )
 });
