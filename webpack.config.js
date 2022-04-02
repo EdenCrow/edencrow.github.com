@@ -4,7 +4,7 @@ module.exports = {
   entry: {
     global: ['JS/coder.js'],
     blog: ['JS/backtotop.js', 'JS/zoom.js'],
-    contact: ['JS/contactform.js'],
+    contact: ['JS/contactForm/index.js'],
   },
   output: {
     filename: '[name].bundle.js',
