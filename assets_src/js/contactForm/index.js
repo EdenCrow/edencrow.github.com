@@ -1,70 +1,50 @@
-import { Button, Input, MessageBox } from "./modules/elementClasses.js";
-import { checkEmpty, validateEmail } from "./modules/clientValidation";
-import {
-  handleResponseError,
-  handleResponseSuccess,
-} from "./modules/handleResponse.js";
-
-// Set Variables //
-// div IDs (note IDs must match name attribute for form and submit)
-const messageID = "messageBox";
-const formID = "formData";
-const submitID = "submit";
-const captchaID = "captcha";
-const emailID = "email";
-// CSS classes
-const messageErrorClass = "messageError";
-const messageSuccessClass = "messageSuccess";
-const messageEmptyClass = "messageEmpty";
-const inputErrorClass = "blinkBorder";
-const captchaErrorClass = "captchaBlinkBorder";
-// Loading icon
-const spinner = '<i class="fa fa-spinner" aria-hidden="true"></i>';
-// Request URL
-const URL = "http://localhost:9876"; // Debug, real URL: https://contact.edencrow.info
+import * as elements from "./modules/elementClasses";
+import * as showOutput from "./modules/showOutput";
+import { clientValid } from "./modules/clientValidation";
+import { sendForm } from "./modules/sendForm";
+import { config } from "./config";
 
 // Setup captcha array for checking against
-const captchaArray = ["h-captcha-response", "g-recaptcha-response", captchaID];
+const captchaArray = [
+  "h-captcha-response",
+  "g-recaptcha-response",
+  config.id.captcha,
+];
 
 // Setup form and submit
-const messageBox = new MessageBox(
-  messageID,
-  messageErrorClass,
-  messageSuccessClass,
-  messageEmptyClass
-);
-const form = document.getElementById(formID);
-const submitButton = new Button(submitID, spinner);
+const messageBox = new elements.MessageBox(config.id.message);
+const form = document.getElementById(config.id.form);
+const submitButton = new elements.Button(config.id.submit);
 
-// Setup captcha
-window.captchaInput = new Input(captchaID, captchaErrorClass, true);
-window.captchaCallback = function () {
-  if (captchaInput.isError) {
-    captchaInput.removeError();
+// Object to store inputs
+const inputsObject = {};
+
+// Create captcha input
+inputsObject["captcha"] = new elements.Input(config.id.captcha, true);
+window.captchaCallback = function () { // Function called by captcha on success
+  if (inputsObject["captcha"].isError) {
+    inputsObject["captcha"].removeError();
   }
 };
 
-// Setup input classes
+// Create fields inputs
 const formFields = new FormData(form);
-let fieldClasses = [window.captchaInput];
 for (let pair of formFields.entries()) {
   let field = pair[0];
   if (!captchaArray.includes(field)) {
-    let textClassName = field + "Input";
-    window[textClassName] = new Input(field, inputErrorClass);
-    fieldClasses.push(window[textClassName]);
+    inputsObject[field] = new elements.Input(field);
   }
 }
 
 // Main function
-form.addEventListener(submitID, (event) => {
+form.addEventListener(config.id.submit, async (event) => {
   event.preventDefault();
 
-  // Update visual feedback
-  fieldClasses.forEach((item) => {
-    item.reset();
-  });
-
+  // Reset output
+  for (let [, value] of Object.entries(inputsObject)) {
+    value.reset();
+  }
+  messageBox.reset();
   submitButton.processing();
 
   // Get form data
@@ -77,32 +57,21 @@ form.addEventListener(submitID, (event) => {
     }
   }
 
-  // Client-side validation
-  let emptyValues = checkEmpty(formData);
-
-  let validEmail = false;
-  if (!emptyValues.includes(emailID)) {
-    validEmail = validateEmail(formData.get(emailID));
-  }
-
-  if (emptyValues.length > 0 || !validEmail) {
+  // Check form is valid => output errors
+  let validationInfo = clientValid(formData, config.id.email);
+  if (validationInfo.errors) {
+    showOutput.input(validationInfo, inputsObject);
     submitButton.processed();
     return;
   }
 
-  // Input is valid => send form
-  fetch(URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(Object.fromEntries(formData)),
-  }).then((result) =>
-    result.json().then((jsonResult) => {
-      submitButton.processed();
-      jsonResult.error
-        ? handleResponseError(jsonResult.errors)
-        : handleResponseSuccess(form, messageBox);
-    })
-  );
+  // Input is valid => send form => output response
+  let response = await sendForm(formData, config.id.email, config.url);
+  if (response.success) {
+    showOutput.successBox(form, messageBox);
+  } else {
+    showOutput.input(response.errors[0], inputsObject);
+    showOutput.errorBox(response.errors[1], messageBox);
+    submitButton.processed();
+  }
 });

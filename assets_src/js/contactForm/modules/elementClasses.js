@@ -1,27 +1,37 @@
-export class Button {
-  constructor(id, spinner) {
+import { buttonConfig, inputConfig, messageConfig } from "../config";
+
+class Button {
+  // Class for submit button
+  constructor(id) {
     this.element = document.getElementById(id);
-    this.spinner = spinner;
     this.processedText = this.element.innerHTML;
   }
   processing() {
-    this.element.innerHTML = [this.spinner, "Processing"].join(" ");
+    // Text and styles to display when form is processing
+    this.element.innerHTML = [
+      buttonConfig.spinner,
+      buttonConfig.text.processing,
+    ].join(" ");
     this.element.style.cursor = "default";
     this.element.disabled = true;
   }
   processed() {
+    // Return to default style when form has finished processing
     this.element.innerHTML = this.processedText;
     this.element.style.cursor = "pointer";
     this.element.disabled = false;
   }
 }
 
-export class Input {
-  constructor(id, errorClass, isCaptcha = false) {
+class Input {
+  // Class for input fields
+  constructor(id, isCaptcha = false) {
     this.element = document.getElementById(id);
     this.isError = false;
     this.isCaptcha = isCaptcha;
-    this.errorClass = errorClass;
+    this.errorClass = isCaptcha
+      ? inputConfig.class.captcha
+      : inputConfig.class.input;
 
     // Setup error message text
     this.errorTextID = "errorText" + id;
@@ -31,6 +41,7 @@ export class Input {
       `<div id="${this.errorTextID}">${this.errorMessageDefault}</div>`
     );
     this.errorMessageDiv = document.getElementById(this.errorTextID);
+    this.errorMessageDiv.classList.add(inputConfig.class.empty);
 
     // Function to remove errors
     this.removeError = function () {
@@ -54,17 +65,18 @@ export class Input {
   // Shows relevant error message
   error(errorType) {
     this.isError = true;
+    this.errorMessageDiv.classList.remove(inputConfig.class.empty);
     this.element.classList.add(this.errorClass);
     this.element.addEventListener("blur", this.removeHandler);
     let errorMessage = "";
     switch (errorType) {
-      case 0:
+      case 0: // Missing error
         if (!this.isCaptcha) {
           this.element.value = "";
         }
         errorMessage = `Missing ${this.element.id}!`;
         break;
-      case 1:
+      case 1: // Invalid error
         errorMessage = `Invalid ${this.element.id}!`;
         break;
       default:
@@ -76,6 +88,7 @@ export class Input {
   // Remove error messages
   reset() {
     this.element.blur();
+    this.errorMessageDiv.classList.add(inputConfig.class.empty);
     if (this.isError) {
       this.element.removeEventListener("blur", this.removeHandler);
       this.removeError();
@@ -83,27 +96,48 @@ export class Input {
   }
 }
 
-export class MessageBox {
-  constructor(id, errorStyle, successStyle, emptyStyle) {
+class MessageBox {
+  // Class for error/success box
+  constructor(id) {
+    this.emptyStyle, (this.style = messageConfig.class.empty);
+
     this.messageBox = document.getElementById(id);
-    this.errorStyle = errorStyle;
-    this.successStyle = successStyle;
-    this.emptyStyle, (this.style = emptyStyle);
+    this.messageBox.classList.add(this.emptyStyle);
   }
-  setMessage(errorType, message = "Email Sent") {
-    if (errorType) {
-      this.messageBox.classList.add(this.errorStyle);
-      this.messageBox.innerHTML = "Error " + message;
+
+  // Set message box
+  setMessage(errors = []) {
+    this.messageBox.classList.remove(this.emptyStyle);
+
+    if (errors.length > 0) {
+      // Display error box
+      this.style = messageConfig.class.error;
+      this.messageBox.classList.add(this.style);
+      let errorsList = "";
+      errors.forEach((value) => {
+        errorsList += "<li>" + value + "</li>";
+      });
+      errorsList = "<ul>" + errorsList + "</ul>";
+      this.messageBox.innerHTML =
+        messageConfig.headers.error + errorsList + messageConfig.title.error;
     } else {
-      this.messageBox.classList.add(this.successStyle);
-      this.messageBox.innerHTML = "Success  " + message;
+      // Display success box
+      this.style = messageConfig.class.success;
+      this.messageBox.classList.add(this.style);
+      this.messageBox.innerHTML =
+        messageConfig.headers.success + messageConfig.title.success;
     }
   }
+
+  // Remove message box
   reset() {
     if (this.style != this.emptyStyle) {
       this.messageBox.classList.remove(this.style);
       this.messageBox.innerHTML = "";
+      this.messageBox.classList.add(this.emptyStyle);
       this.style = this.emptyStyle;
     }
   }
 }
+
+export { Button, Input, MessageBox };

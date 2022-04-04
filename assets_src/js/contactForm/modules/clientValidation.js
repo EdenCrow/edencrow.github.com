@@ -1,27 +1,29 @@
 import isEmail from "validator/lib/isEmail";
 
-export function checkEmpty(formData) {
-  let emptyValues = [];
-  for (let pair of formData.entries()) {
+function clientValid(data, emailID) {
+  let errors = { errors: false, empty: [], invalid: [] };
+
+  // Checks for missing fields
+  errors.empty = [];
+  for (let pair of data.entries()) {
     let inputKey = pair[0];
     let inputValue = pair[1].trim();
     if (inputValue.length === 0) {
-      emptyValues.push(inputKey);
-      let inputClassName = inputKey + "Input";
-      window[inputClassName].error(0);
+      errors.empty.push(inputKey);
     }
   }
-  return emptyValues;
+
+  // Checks if email is valid
+  if (!errors.empty.includes(emailID) && !isEmail(data.get(emailID))) {
+    errors.invalid.push(emailID);
+  }
+
+  // Sets errors to true if any missing or invalid fields
+  if (errors.empty.length > 0 || errors.invalid.length > 0) {
+    errors.errors = true;
+  }
+
+  return errors;
 }
 
-export function validateEmail(email) {
-  let isValid = isEmail(email, {
-    require_tld: false,
-    ignore_max_length: true,
-    allow_ip_domain: true,
-  });
-  if (!isValid) {
-    emailInput.error(1);
-  }
-  return isValid;
-}
+export { clientValid };

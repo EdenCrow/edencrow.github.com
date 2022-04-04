@@ -29,22 +29,6 @@
   cursor: pointer;
 }
 
-.fa-spinner {
-  animation-name: spin;
-  animation-duration: 2500ms;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 // Error borders
 $errorColour: #ff0000;
 $flashColour: #fff;
@@ -90,10 +74,25 @@ $flashColour: #fff;
   visibility: hidden;
 }
 
+.messageBox {
+  border-radius: 25px;
+  border: 2px;
+  padding-left: 1em;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+  & h3 {
+    margin-top: 1em;
+  }
+}
+
 .messageSuccess {
-  background-color: green;
+  @extend .messageBox;
+  border: solid #73AD21;
+  background-color: #008000;
 }
 
 .messageError {
-  background-color: red;
+  @extend .messageBox;
+  border: solid #c41636;
+  background-color: #ff0000;
 }
