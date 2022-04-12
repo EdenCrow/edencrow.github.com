@@ -1,4 +1,5 @@
-function error(data, emailID) { // Takes errors from backend and puts into frontend readable format
+function error(data, emailID) {
+  // Takes errors from backend and puts into frontend readable format
   let inputErrors = { empty: [], invalid: [] };
   let boxErrors = [];
 
@@ -6,9 +7,6 @@ function error(data, emailID) { // Takes errors from backend and puts into front
     switch (key) {
       case "missing":
         value.forEach((missingEntry) => {
-          if (missingEntry === "token") {
-            missingEntry = "captcha";
-          }
           inputErrors.empty.push(missingEntry);
         });
         break;
@@ -22,16 +20,19 @@ function error(data, emailID) { // Takes errors from backend and puts into front
           boxErrors.push("Captcha server failed");
         }
         break;
-      default:
-        boxErrors.push(key + value);
+      case "internal":
+        boxErrors.push("Internal server error");
         break;
+      default:
+        boxErrors.push("Unknown server error");
     }
   }
 
   return [inputErrors, boxErrors];
 }
 
-async function sendForm(form, emailID, url) { // Attempts to send email and returns given output
+async function sendForm(form, emailID, url) {
+  // Attempts to send email and returns given output
   let response = {
     success: false,
     errors: [/* inputErrors */ { empty: [], invalid: [] }, /*boxErrors*/ []],

@@ -1,4 +1,5 @@
-const config = { // Config options for index.js
+const config = {
+  // Config options for index.js
   id: {
     message: "messageBox",
     form: "formData",
@@ -6,25 +7,28 @@ const config = { // Config options for index.js
     captcha: "captcha",
     email: "email",
   },
-  url: "http://localhost:9876",
+  url: "https://contact.edencrow.info",
 };
 
-const buttonConfig = { // Config options for submit button
+const buttonConfig = {
+  // Config options for submit button
   spinner: '<i class="fa fa-spinner fa-pulse fa-fw"></i>',
   text: {
     processing: "Processing",
   },
 };
 
-const inputConfig = { // Config options for form fields
+const inputConfig = {
+  // Config options for form fields
   class: {
     input: "blinkBorder",
     captcha: "captchaBlinkBorder",
-    empty: "messageEmpty"
+    empty: "messageEmpty",
   },
 };
 
-const messageConfig = { // Config options for message box
+const messageConfig = {
+  // Config options for message box
   headers: {
     error:
       "<h3><i class='fa fa-exclamation-triangle' aria-hidden='true'></i> Error(s)!</h3>",

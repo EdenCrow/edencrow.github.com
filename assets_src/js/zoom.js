@@ -1,5 +1,5 @@
 import mediumZoom from "medium-zoom";
 
-mediumZoom('img', {
-    background: '#212121',
-})
+mediumZoom("img", {
+  background: "#212121",
+});

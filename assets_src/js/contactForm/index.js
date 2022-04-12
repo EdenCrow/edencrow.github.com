@@ -21,7 +21,8 @@ const inputsObject = {};
 
 // Create captcha input
 inputsObject["captcha"] = new elements.Input(config.id.captcha, true);
-window.captchaCallback = function () { // Function called by captcha on success
+window.captchaCallback = function () {
+  // Function called by captcha on success
   if (inputsObject["captcha"].isError) {
     inputsObject["captcha"].removeError();
   }

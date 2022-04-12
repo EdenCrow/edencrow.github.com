@@ -1,6 +1,6 @@
 // Script by Anish De on freeCodeCamp: https://www.freecodecamp.org/news/back-to-top-button-and-page-progressbar-with-html-css-and-js/
 const showOnPx = 100;
-const backToTopButton = document.querySelector(".back-to-top")
+const backToTopButton = document.querySelector(".back-to-top");
 
 const scrollContainer = () => {
   return document.documentElement || document.body;
@@ -8,11 +8,11 @@ const scrollContainer = () => {
 
 document.addEventListener("scroll", () => {
   if (scrollContainer().scrollTop > showOnPx) {
-    backToTopButton.classList.remove("hidden")
+    backToTopButton.classList.remove("hidden");
   } else {
-    backToTopButton.classList.add("hidden")
+    backToTopButton.classList.add("hidden");
   }
-})
+});
 
 const goToTop = () => {
   document.body.scrollIntoView({
@@ -20,4 +20,4 @@ const goToTop = () => {
   });
 };
 
-backToTopButton.addEventListener("click", goToTop)
+backToTopButton.addEventListener("click", goToTop);
