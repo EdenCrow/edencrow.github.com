@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    global: ['JS/coder.js'],
+    global: ['JS/coder.js', 'JS/typewriter.js'],
     blog: ['JS/backtotop.js', 'JS/zoom.js'],
     contact: ['JS/contactForm/index.js'],
   },
