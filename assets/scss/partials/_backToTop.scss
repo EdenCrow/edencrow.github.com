@@ -7,7 +7,6 @@
   visibility: visible;
 
   transition: visibility 0.5s, opacity 0.5s;
-
   font-size: 2em;
 
   button {
@@ -18,6 +17,8 @@
     max-width: 100%;
     border-radius: 50%;
     border: none;
+    padding: 0px;
+    color: white;
   }
 
   @media (hover) {
