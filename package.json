@@ -4,7 +4,10 @@
   "description": "The repository for my personal homepage",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "hugo",
+    "create": "hugo new",
+    "serve": "hugo server"
   },
   "repository": {
     "type": "git",
@@ -15,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/EdenCrow/edencrow.github.com/issues"
   },
-  "homepage": "https://github.com/EdenCrow/edencrow.github.com#readme"
+  "homepage": "https://github.com/EdenCrow/edencrow.github.com#readme",
+  "devDependencies": {
+    "hugo-bin-extended": "^0.110.0"
+  }
 }
