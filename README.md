@@ -1,26 +1,15 @@
-# EdenCrow.info
-This repository hosts my personal homepage, which can be found at [https://edencrow.info](https://edencrow.info).
+<p align="center">
+  <img alt="Files Logo" src="avatar.png" width="100px" />
+  <h1 align="center">EdenCrow.info</h1>
+</p>
 
-The project uses [Hugo](https://github.com/gohugoio/hugo) to build a static website.
+<div style="text-align:center">
 
-It uses [Hugo-Coder](https://github.com/luizdepra/hugo-coder) by Luiz F. A. de Prá for its theme.
+![image](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![image](https://img.shields.io/badge/Hugo-FF4088?style=for-the-badge&logo=Hugo&logoColor=white)
 
-The site is hosted with the use of [GitHub Pages](https://pages.github.com/).
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 
-## Notes on Blog Images
-Full sized blog images should be placed in `static/images/blogImages`. Images will be compressed at build/serve with [squoosh](https://github.com/GoogleChromeLabs/squoosh).
-
-To insert the image into the blogpost we use the line:
-
-``` go
-{{< image name="[filename]" alt="[altText]" caption="[captionText]" originalFiletype="[originalFileExtension]" lazy="true" >}}
-```
-
-[Required]
-- `name` is the name of the file (without the file extension)
-- `alt` sets the alt text for the image element
-- `caption` sets the figcaption for the image
-
-[Optional]
-- `originalFiletype` is the file extension for the original file (otherwise defaults to `png`)
-- `lazy` if defined with any value will give the image the `loading=lazy` attribute
+The repository for my personal homepage.
+</div>

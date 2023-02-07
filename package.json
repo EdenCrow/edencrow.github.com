@@ -1,19 +1,9 @@
 {
   "name": "edencrow.github.com",
-  "version": "1.0.0",
-  "description": "Personal homepage for Eden Crow",
-  "hugo-bin": {
-    "buildTags": "extended"
-  },
+  "version": "0.1.0",
+  "description": "The repository for my personal homepage",
+  "main": "index.js",
   "scripts": {
-    "build": "npm run squoosh && webpack --mode=production && npm run hugo:build",
-    "serve": "npm run squoosh && concurrently \"webpack --mode=development --watch\" \"npm:hugo:serve\" -k",
-    "clean": "node scripts/serveCleanup.js",
-    "squoosh": "npm run squoosh:blogImages",
-    "hugo:build": "hugo  --cleanDestinationDir --minify",
-    "hugo:create": "hugo new",
-    "hugo:serve": "hugo server",
-    "squoosh:blogImages": "node scripts/squoosh.js ./static/images/blogImages",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,22 +11,9 @@
     "url": "git+https://github.com/EdenCrow/edencrow.github.com.git"
   },
   "author": "Eden Crow",
-  "license": "",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/EdenCrow/edencrow.github.com/issues"
   },
-  "homepage": "https://github.com/EdenCrow/edencrow.github.com#readme",
-  "devDependencies": {
-    "concurrently": "^7.0.0",
-    "hugo-bin": "^0.82.1",
-    "webpack": "^5.70.0",
-    "webpack-cli": "^4.9.2"
-  },
-  "dependencies": {
-    "@squoosh/lib": "^0.4.0",
-    "autoprefixer": "^10.4.4",
-    "medium-zoom": "^1.0.6",
-    "typewriter-effect": "^2.18.2",
-    "validator": "^13.7.0"
-  }
+  "homepage": "https://github.com/EdenCrow/edencrow.github.com#readme"
 }
