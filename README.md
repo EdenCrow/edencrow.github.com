@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="Files Logo" src="avatar.png" width="100px" />
+  <img alt="Files Logo" src="static/images/avatar.png" width="100px" />
   <h1 align="center">EdenCrow.info</h1>
 </p>
 
@@ -7,6 +7,7 @@
 
 ![image](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![image](https://img.shields.io/badge/Hugo-FF4088?style=for-the-badge&logo=Hugo&logoColor=white)
+![image](https://img.shields.io/badge/GitHub%20Pages-222222?style=for-the-badge&logo=GitHubPages&logoColor=white)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)

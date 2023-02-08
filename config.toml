@@ -1,5 +1,5 @@
-baseurl = "http://www.example.com"
-title = "johndoe"
+baseurl = "https://edencrow.info"
+title = "Eden Crow"
 theme = "hugo-coder"
 languagecode = "en"
 defaultcontentlanguage = "en"
@@ -13,22 +13,22 @@ pygmentscodefencesguesssyntax = true
 disqusShortname = "yourdiscussshortname"
 
 [params]
-  author = "John Doe"
-  info = "Full Stack DevOps and Magician"
+  author = "Eden Crow"
+  info = "♥️ Tech ♥️"
   description = "John Doe's personal website"
   keywords = "blog,developer,personal"
-  avatarurl = "images/avatar.jpg"
+  avatarurl = "images/avatar.png"
   #gravatar = "john.doe@example.com"
 
   favicon_32 = "/img/favicon-32x32.png"
   favicon_16 = "/img/favicon-16x16.png"
 
-  since = 2019
+  since = 2023
 
   enableTwemoji = true
 
-  colorScheme = "auto"
-  hidecolorschemetoggle = false
+  colorScheme = "dark"
+  hidecolorschemetoggle = true
 
   # customCSS = ["css/custom.css"]
   # customSCSS = ["scss/custom.scss"]
@@ -45,24 +45,9 @@ disqusShortname = "yourdiscussshortname"
   name = "Github"
   icon = "fa fa-github fa-2x"
   weight = 1
-  url = "https://github.com/johndoe/"
-[[params.social]]
-  name = "Gitlab"
-  icon = "fa fa-gitlab fa-2x"
-  weight = 2
-  url = "https://gitlab.com/johndoe/"
+  url = "https://github.com/EdenCrow/"
 [[params.social]]
   name = "Twitter"
   icon = "fa fa-twitter fa-2x"
   weight = 3
-  url = "https://twitter.com/johndoe/"
-
-# Menu links
-[[menu.main]]
-  name = "Blog"
-  weight = 1
-  url  = "posts/"
-[[menu.main]]
-  name = "About"
-  weight = 2
-  url = "about/"
+  url = "https://twitter.com/EdenHJCrow/"
