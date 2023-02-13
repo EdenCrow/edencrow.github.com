@@ -1,7 +1,11 @@
+.centered .about h1 {
+    margin-top: 0em;
+}
 .about{
     img {
         width: 40rem;
     }
+
     ul {
         display: flex;
         justify-content: center;
