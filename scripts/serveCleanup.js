@@ -3,7 +3,8 @@ const fs = require('fs');
 const delDirs = [
     // Add directories created at build
     './assets/js',
-    './resources'
+    './resources',
+    './public'
 ];
 
 delDirs.forEach((element) => {

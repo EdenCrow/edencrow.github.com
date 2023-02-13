@@ -6,9 +6,11 @@
     "buildTags": "extended"
   },
   "scripts": {
+    "build": "webpack --mode=production && npm run hugo:build",
     "serve": "concurrently \"webpack --mode=development --watch\" \"npm:hugo:serve\" -k",
     "clean": "node scripts/serveCleanup.js",
-    "hugo:serve": "hugo server"
+    "hugo:serve": "hugo server",
+    "hugo:build": "hugo --cleanDestinationDir"
   },
   "repository": {
     "type": "git",
