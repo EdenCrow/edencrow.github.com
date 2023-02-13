@@ -1,9 +1,6 @@
-<p align="center">
+<div align="center">
   <img alt="Eden's avatar" src="static/images/avatar.png" width="100px" />
   <h1 align="center">EdenCrow.info</h1>
-</p>
-
-<div style="text-align:center">
 
 ![image](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![image](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
@@ -31,7 +28,7 @@
     - [Roadmap table](#mapTable)
 4. [Licenses](#license)
 4. [Acknowledgements](#acknowledgements)
-    - [README support](#readme)
+    - [README support](#ackReadme)
 
 </details>
 
@@ -112,7 +109,7 @@ Blog content posted to the site is licensed under [CC BY 4.0](https://creativeco
 
 ## :star: Acknowledgements
 
-<a id="readme"></a>
+<a id="ackReadme"></a>
 
 ### README support
 - [Shields](https://github.com/badges/shields)
