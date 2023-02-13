@@ -1,13 +1,14 @@
 {
   "name": "edencrow.github.com",
   "version": "0.1.0",
-  "description": "The repository for my personal homepage",
-  "main": "index.js",
+  "description": "Personal homepage for Eden Crow",
+  "hugo-bin": {
+    "buildTags": "extended"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "hugo",
-    "create": "hugo new",
-    "serve": "hugo server"
+    "hugo:build": "hugo --minify",
+    "hugo:create": "hugo new",
+    "hugo:serve": "hugo server"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,6 @@
   },
   "homepage": "https://github.com/EdenCrow/edencrow.github.com#readme",
   "devDependencies": {
-    "hugo-bin-extended": "^0.110.0"
+    "hugo-bin": "0.98.0"
   }
 }
