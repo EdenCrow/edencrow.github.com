@@ -1,4 +1,4 @@
-baseurl = "https://edencrow.info"
+baseurl = "https://www.edencrow.info"
 title = "Eden Crow"
 theme = "hugo-coder"
 languagecode = "en"
@@ -14,14 +14,12 @@ disqusShortname = "yourdiscussshortname"
 
 [params]
   author = "Eden Crow"
-  info = ""
   description = "Eden Crow's personal website"
   keywords = "blog,developer,personal"
   avatarurl = "images/avatar.png"
-  #gravatar = "john.doe@example.com"
 
-  favicon_32 = "/images/favicon-32x32.png"
-  favicon_16 = "/images/favicon-16x16.png"
+  favicon_32 = "images/favicon-32x32.png"
+  favicon_16 = "images/favicon-16x16.png"
 
   since = 2023
 
@@ -30,7 +28,6 @@ disqusShortname = "yourdiscussshortname"
   colorScheme = "dark"
   hidecolorschemetoggle = true
 
-  # customCSS = ["css/custom.css"]
   customSCSS = ["scss/global.scss"]
   customJS = ["js/global.bundle.js"]
 
