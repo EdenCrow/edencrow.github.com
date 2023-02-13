@@ -31,8 +31,8 @@ disqusShortname = "yourdiscussshortname"
   hidecolorschemetoggle = true
 
   # customCSS = ["css/custom.css"]
-  # customSCSS = ["scss/custom.scss"]
-   customJS = ["js/global.bundle.js"]
+  customSCSS = ["scss/global.scss"]
+  customJS = ["js/global.bundle.js"]
 
 [taxonomies]
   category = "categories"

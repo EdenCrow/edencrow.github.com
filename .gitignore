@@ -6,4 +6,4 @@ node_modules
 #build
 .hugo_build.lock
 resources/
-assets/
+assets/js
