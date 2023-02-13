@@ -14,7 +14,7 @@ disqusShortname = "yourdiscussshortname"
 
 [params]
   author = "Eden Crow"
-  info = "👷 Tech Projects 👷"
+  info = ""
   description = "John Doe's personal website"
   keywords = "blog,developer,personal"
   avatarurl = "images/avatar.png"
@@ -32,7 +32,7 @@ disqusShortname = "yourdiscussshortname"
 
   # customCSS = ["css/custom.css"]
   # customSCSS = ["scss/custom.scss"]
-  # customJS = ["js/custom.js"]
+   customJS = ["js/global.bundle.js"]
 
 [taxonomies]
   category = "categories"

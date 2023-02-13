@@ -6,8 +6,8 @@
     "buildTags": "extended"
   },
   "scripts": {
-    "hugo:build": "hugo --minify",
-    "hugo:create": "hugo new",
+    "serve": "concurrently \"webpack --mode=development --watch\" \"npm:hugo:serve\" -k",
+    "clean": "node scripts/serveCleanup.js",
     "hugo:serve": "hugo server"
   },
   "repository": {
@@ -21,6 +21,12 @@
   },
   "homepage": "https://github.com/EdenCrow/edencrow.github.com#readme",
   "devDependencies": {
-    "hugo-bin": "0.98.0"
+    "concurrently": "^7.6.0",
+    "hugo-bin": "0.98.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  },
+  "dependencies": {
+    "typewriter-effect": "^2.19.0"
   }
 }
