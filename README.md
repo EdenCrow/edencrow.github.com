@@ -92,7 +92,7 @@ Each section (eg. the homepage) is being developed one at a time, and will be pu
 ### Roadmap table
 |Version|Description|Completion|Estimate
 |---|---|---|---|
-|0.1.0|Homepage|:wrench:Avatar<br/>:wrench:Info panel w/ [TypewriterJS](https://github.com/tameemsafi/typewriterjs)<br/>:wrench:Social icons<br/>:x:Build & deployment|Q1 2023
+|0.1.0|Homepage|:heavy_check_mark:Avatar<br/>:heavy_check_mark:Info panel w/ [TypewriterJS](https://github.com/tameemsafi/typewriterjs)<br/>:wrench:Social icons<br/>:x:Build & deployment|Q1 2023
 |0.2.0|Blog|:x:Use of blog from theme<br/>:x:Image zoom w/ [medium-zoom](https://github.com/francoischalifour/medium-zoom)|Q2 2023
 |0.3.0|About|:x:Custom page|Q2 2023
 |0.4.0|Contact|:x:Custom page<br/>:x:Self-hosted backend|Q3 2023
