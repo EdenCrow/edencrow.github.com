@@ -10,7 +10,7 @@
     "serve": "concurrently \"webpack --mode=development --watch\" \"npm:hugo:serve\" -k",
     "clean": "node scripts/serveCleanup.js",
     "hugo:serve": "hugo server",
-    "hugo:build": "hugo --cleanDestinationDir"
+    "hugo:build": "hugo --cleanDestinationDir --minify"
   },
   "repository": {
     "type": "git",
