@@ -24,8 +24,6 @@
     - [Download](#devDownload)
     - [Serving locally](#devLocal)
 3. [Roadmap](#map)
-    - [Guide](#mapGuide)
-    - [Roadmap table](#mapTable)
 4. [Licenses](#license)
 4. [Acknowledgements](#acknowledgements)
     - [README support](#ackReadme)
@@ -78,27 +76,7 @@ Each section (eg. the homepage) is being developed one at a time, and will be pu
 
 ## :dart: Roadmap
 
-<a id="mapGuide"></a>
-
-### Guide
-:heavy_check_mark:: Complete
-
-:wrench:: In development
-
-:x:: Not yet in development
-
-*Note: Release dates use dd/mm/yy*
-
-<a id="mapTable"></a>
-
-### Roadmap table
-|Version|Description|Completion|Estimate
-|---|---|---|---|
-|0.1.0|Homepage|:heavy_check_mark:Avatar<br/>:heavy_check_mark:Info panel w/ [TypewriterJS](https://github.com/tameemsafi/typewriterjs)<br/>:heavy_check_mark:Build & deployment|Released 17/02/23
-|0.2.0|Blog|:x:Use of blog from theme<br/>:x:Image zoom w/ [medium-zoom](https://github.com/francoischalifour/medium-zoom)|Q2 2023
-|0.3.0|About|:x:Custom page|Q2 2023
-|0.4.0|Contact|:x:Custom page<br/>:x:Self-hosted backend|Q3 2023
-|0.5.0|Monitoring|:x:Self-hosted analytics w/ [Plausible](https://github.com/plausible/analytics)<br/>:x:[Home Assitant](https://www.home-assistant.io/) integration|Q4 2023
+To see the roadmap for this project, please check [the relevant wiki page](https://github.com/EdenCrow/edencrow.github.com/wiki/%F0%9F%8E%AF-Roadmap).
 
 <a id="license"></a>
 
