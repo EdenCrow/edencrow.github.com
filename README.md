@@ -2,10 +2,10 @@
   <img alt="Eden's avatar" src="static/images/avatar.png" width="100px" />
   <h1 align="center">EdenCrow.info</h1>
 
-![image](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
-![image](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
-![image](https://img.shields.io/badge/Hugo-FF4088?style=for-the-badge&logo=Hugo&logoColor=white)
-![image](https://img.shields.io/badge/GitHub%20Pages-222222?style=for-the-badge&logo=GitHubPages&logoColor=white)
+[![NodeJS](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/)
+[![Hugo](https://img.shields.io/badge/Hugo-FF4088?style=for-the-badge&logo=Hugo&logoColor=white)](https://gohugo.io/)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-222222?style=for-the-badge&logo=GitHubPages&logoColor=white)](https://pages.github.com/)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
@@ -44,9 +44,9 @@ The site is created with the use of:
 - **[Webpack](https://webpack.js.org/)**: module bundling
 - and a small selection of other npm packages
 
-It is hosted from this repo via [GitHub Pages](https://pages.github.com/).
+It is automatically deployed to [GitHub Pages](https://pages.github.com/) via [GitHub Actions](https://github.com/features/actions).
 
-Each section (eg. the homepage) is being developed one at a time, and will be pushed live once complete. For more information see [the roadmap](#map).
+Each section (eg. the homepage) is being developed one at a time, and will be pushed live once complete.
 
 <a id="dev"></a>
 
