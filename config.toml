@@ -12,9 +12,10 @@ pygmentscodefencesguesssyntax = true
 
 [params]
   author = "Eden Crow"
-  description = "Eden Crow's personal website"
+  description = "Hobbyist Dev 👷 | ❤️ Tech"
   keywords = "blog,developer,personal"
   avatarurl = "images/avatar.png"
+  images = ['images/opengraph.png']
 
   favicon_32 = "images/favicon-32x32.png"
   favicon_16 = "images/favicon-16x16.png"
@@ -28,6 +29,9 @@ pygmentscodefencesguesssyntax = true
 
   customSCSS = ["scss/global.scss"]
   customJS = ["js/global.bundle.js"]
+
+[social]
+twitter = "EdenHJCrow"
 
 [taxonomies]
   category = "categories"
